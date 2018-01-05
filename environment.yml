@@ -1,6 +1,9 @@
-name: lib-app-env
+name: nurbs-exercises-venv
 dependencies:
   - python=3.
   - numpy
   - scipy
   - matplotlib
+  - pip
+  - pip: 
+    - nurbs-algorithms
