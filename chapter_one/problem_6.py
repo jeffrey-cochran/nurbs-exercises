@@ -10,5 +10,8 @@ points = (
     asarray([8, 0]),
 )
 
-plot_2D_power_basis_curve(points)
+plot_2D_power_basis_curve(points, label='Loop Example')
+plt.xlim(0.5, 1.5)
+plt.ylim(0.5, 1.5)
+plt.legend()
 plt.show()
