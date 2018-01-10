@@ -161,6 +161,37 @@ def plot_3D_bezier_surface(points, u_range=(0, 1,), v_range=(0, 1),
     return
 
 
+def plot_3D_rational_bezier_surface(points, u_range=(0, 1,), v_range=(0, 1),
+                                    num_u_pts=20, num_v_pts=20, ax=None,
+                                    **kwargs):
+    #
+    u_discretization = linspace(u_range[0], u_range[1], num_u_pts)
+    v_discretization = linspace(v_range[0], v_range[1], num_v_pts)
+    #
+    # Plot a basic wireframe.
+    n = len(points) - 1
+    m = len(points[0]) - 1
+    x = zeros((num_u_pts, num_v_pts))
+    y = zeros((num_u_pts, num_v_pts))
+    z = zeros((num_u_pts, num_v_pts))
+    print(x.shape)
+    for i in range(len(u_discretization)):
+        for j in range(len(v_discretization)):
+            p = deCasteljau2(points, n, m, u_discretization[i], v_discretization[j])
+            x[i, j] = p[0] / p[3]
+            y[i, j] = p[1] / p[3]
+            z[i, j] = p[2] / p[3]
+        #
+    #
+    if ax is None:
+        fig = plt.figure()
+        ax = fig.gca(projection='3d')
+    #
+    ax.plot_surface(x, y, z, **kwargs)
+    #
+    return
+
+
 def plot_3D_bezier_isocurve(points, u, v_range=(0, 1),
                          num_v_pts=20, ax=None,
                          **kwargs):
